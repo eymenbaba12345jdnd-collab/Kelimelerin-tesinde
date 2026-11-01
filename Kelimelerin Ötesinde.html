@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kelimelerin Ötesinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f9dbe3; --paper2:#f3c3d0; --ink:#3b1124; --soft:#7a3f56; --accent:#d6336c; --on-accent:#fff;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#2a0f1c; --paper2:#3b1829; --ink:#fbe3ea; --soft:#d9a3b6; --accent:#ff7aa5; --on-accent:#2a0f1c; color-scheme:dark;}
+}
+:root[data-theme="dark"]{--paper:#2a0f1c; --paper2:#3b1829; --ink:#fbe3ea; --soft:#d9a3b6; --accent:#ff7aa5; --on-accent:#2a0f1c; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1.05rem;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:44rem;margin:0 auto;padding:0 1.5rem}
+.hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:4rem 0 3rem}
+.hero small{font-size:1rem;color:var(--soft)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.8rem,14.5vw,7rem);line-height:.95;letter-spacing:-.03em;margin:1rem 0 1.5rem}
+h1 span{display:block}
+h1 .beyond{font-style:italic;font-weight:400;color:transparent;-webkit-text-stroke:1.5px var(--accent);animation:drift 2.4s ease-out both}
+@keyframes drift{from{opacity:0;letter-spacing:.25em}to{opacity:1;letter-spacing:-.03em}}
+@media (prefers-reduced-motion:reduce){h1 .beyond{animation:none}html{scroll-behavior:auto}}
+.lead{font-family:var(--serif);font-size:1.35rem;line-height:1.5;max-width:30rem;margin:0 0 2rem}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);font:600 1rem var(--sans);padding:.9rem 1.6rem;border-radius:999px;text-decoration:none;border:0;cursor:pointer;margin:0 .5rem .6rem 0}
+.btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--accent)}
+section{padding:3.5rem 0}
+h2{font-family:var(--serif);font-size:1.9rem;line-height:1.2;margin:0 0 1rem}
+.band{background:var(--paper2)}
+blockquote{margin:0;font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1.5;border-left:4px solid var(--accent);padding-left:1.2rem}
+blockquote cite{display:block;margin-top:1rem;font-style:normal;font-family:var(--sans);font-size:.95rem;color:var(--soft)}
+ul{padding-left:1.2rem;margin:0}
+li{margin-bottom:.6rem}
+footer{padding:2.5rem 0 3rem;color:var(--soft);font-size:.95rem}
+
+/* okuyucu */
+#reader{position:fixed;inset:0;z-index:50;background:rgba(30,6,16,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);overflow:hidden}
+#reader[hidden]{display:none}
+#close{position:absolute;top:calc(env(safe-area-inset-top,0px) + .6rem);right:.8rem;background:none;border:0;color:#fff;font:600 1rem var(--sans);padding:.7rem 1rem;cursor:pointer}
+.stage{--pw:min(84vw,350px);--ph:calc(var(--pw)*1.42);perspective:1500px;width:var(--pw);height:var(--ph);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.book{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s ease}
+.book.closed{transform:rotateX(5deg) rotateY(-18deg)}
+.leaf{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;border-radius:2px 8px 8px 2px;box-shadow:0 3px 14px rgba(0,0,0,.35)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:2px 8px 8px 2px;overflow:hidden}
+.front{background:#fff5f7;color:#3b1124;padding:1.5rem 1.4rem 2rem;background-image:linear-gradient(90deg,rgba(120,40,70,.18),transparent 7%)}
+.back{background:#f4dce3;transform:rotateY(180deg);background-image:linear-gradient(270deg,rgba(120,40,70,.18),transparent 12%)}
+.cover{background:linear-gradient(135deg,#e0457c,#a3214f);color:#fff;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:2rem 1.4rem;background-image:linear-gradient(90deg,rgba(0,0,0,.28),transparent 9%),linear-gradient(135deg,#e0457c,#a3214f)}
+.cover small{font-size:.9rem;opacity:.85}
+.cover b{font-family:var(--serif);font-size:clamp(1.9rem,9vw,2.6rem);line-height:1.05;margin:.8rem 0;display:block}
+.cover i{font-family:var(--serif);font-size:.95rem;opacity:.9}
+.pg h3{font-family:var(--serif);font-size:1.2rem;line-height:1.2;margin:0 0 .8rem}
+.pg p{font-family:var(--serif);font-size:.86rem;line-height:1.5;margin:0 0 .65rem}
+.pg .poem{font-style:italic;line-height:1.6;margin-bottom:1.1rem}
+.pg em.n{position:absolute;bottom:.7rem;left:0;right:0;text-align:center;font:.75rem var(--sans);color:#9a5a72}
+.pg .mid{display:flex;flex-direction:column;justify-content:center;height:100%;text-align:center}
+.ctl{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;color:#fff}
+.ctl button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:999px;font:600 .95rem var(--sans);padding:.6rem 1.1rem;cursor:pointer}
+.ctl button:disabled{opacity:.35}
+.hint{color:#f5c2d1;font-size:.9rem;margin-top:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <div class="wrap">
+    <small>Şiir kitabı · yakında</small>
+    <h1><span>Kelimelerin</span><span class="beyond">ötesinde</span></h1>
+    <p class="lead">Bazı duygular anlatılmaz, sadece hissedilir.</p>
+    <button class="btn" data-read>Kitabı oku</button>
+    <a class="btn alt" href="#haber">Çıkınca haber ver</a>
+  </div>
+</header>
+
+<section class="band" id="kitap">
+  <div class="wrap">
+    <h2>Kitap hakkında</h2>
+    <p>Her insanın içinde, kelimelere kolayca dönüşmeyen bir dünya vardır. Bu kitap, o sessizliğin içinden doğdu.</p>
+    <p>Sayfalarında yalnızca aşkı ve hüznü değil; insanı, zamanı, pişmanlıkları, umutları ve hayata dair küçük ama derin gerçekleri bulacaksın. Şiirlerin yanında kısa düşünce yazıları ve hiç gönderilmeyen mektuplar da var.</p>
+    <ul>
+      <li>Yazar: <strong>Yazar Adı</strong></li>
+      <li>Tür: Şiir ve düşünce yazıları</li>
+      <li>Sayfa: 39</li>
+    </ul>
+  </div>
+</section>
+
+<section id="alinti">
+  <div class="wrap">
+    <blockquote>
+      “Bazı duyguların karşılığı konuşmak değil, susmaktır.”
+      <cite>Kelimelerin Ötesinde, giriş bölümünden</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="band" id="oku">
+  <div class="wrap">
+    <h2>Kitaptan birkaç sayfa</h2>
+    <p>Kapağı parmağınla sola sürükleyerek aç, sayfaları aynı şekilde çevir.</p>
+    <button class="btn" data-read>Kitabı aç</button>
+  </div>
+</section>
+
+<section id="yazar">
+  <div class="wrap">
+    <h2>Yazar</h2>
+    <p>Yazar Adı, defterlerine sığdıramadığı cümleleri bu kitapta bir araya getirdi. Kendisi hakkında kısa bir tanıtım yazısı buraya gelecek.</p>
+  </div>
+</section>
+
+<section class="band" id="haber">
+  <div class="wrap">
+    <h2>İlk okuyanlardan ol</h2>
+    <p>Kitap çıktığında ilk sen haberdar ol. E-posta ile haber istemek için aşağıya dokun.</p>
+    <a class="btn" href="mailto:ornek@eposta.com?subject=Kelimelerin%20%C3%96tesinde%20haber">E-posta gönder</a>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">© 2026 Yazar Adı · Kelimelerin Ötesinde</div></footer>
+
+<div id="reader" role="dialog" aria-modal="true" aria-label="Kitap okuyucu" hidden>
+  <button id="close">Kapat ✕</button>
+  <div class="stage" id="stage">
+    <div class="book closed" id="book">
+      <div class="leaf"><div class="face cover"><small>Şiir kitabı</small><b>Kelimelerin Ötesinde</b><i>Bazı duygular anlatılmaz,<br>sadece hissedilir.</i></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Giriş</h3>
+<p>Her insanın içinde, kelimelere kolayca dönüşmeyen bir dünya vardır. Kimi zaman bir bakışta saklanır bu dünya, kimi zaman yarım kalmış bir cümlede… Bazen insan, anlatmak istediği her şeyi içine atar; çünkü bazı duyguların karşılığı konuşmak değil, susmaktır.</p>
+<p>Bu kitap, o sessizliğin içinden doğdu. Sayfalarında yalnızca aşkı ve hüznü değil; insanı, zamanı, pişmanlıkları, umutları ve hayata dair küçük ama derin gerçekleri bulacaksın. Belki bir dizede kendini görecek, belki de daha önce hiç sormadığın bir soruyla baş başa kalacaksın.</p><em class="n">2</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><div class="mid"><p>Her şiirin sende aynı duyguyu uyandırmasını bekleme.</p>
+<p>Bazıları içini ısıtabilir, bazıları eski bir anıyı hatırlatabilir; bazılarıysa uzun süre aklından çıkmayabilir. Çünkü şiir, yalnızca yazanın anlattığı değildir. Okuyan kişinin yaşadıklarıyla yeniden anlam kazanır.</p></div><em class="n">3</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Aşkın Anlamı</h3>
+<p><i>Her kalpte başka bir hikâye…</i></p>
+<p>Aşk, kiminin yarım kalmış hikâyesidir; kiminin yıllar geçse de unutamadığı bir hatıra. Kimi için beklemek, kimi için vazgeçmeyi öğrenmektir. Bazen bir gülüşte başlayan en güzel ihtimal, bazen tek bir veda ile içimizde büyüyen bir sessizliktir.</p>
+<p>Kimi aşkı kavuşmakta bulur, kimi uzaktan sevmekte. Kimi için birkaç güzel anıdır; kimi için ömür boyu taşıdığı bir iz. Bazıları aşk sayesinde kendini bulur, bazılarıysa sevdiği insanda kendinden bir parça bırakır.</p><em class="n">4</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Aynı Renk</h3>
+<p class="poem">Sorsan ikimiz de aynı renkte;<br>birimiz deniz, birimiz gökyüzü.<br>Bakışmak serbest,<br>kavuşmak imkânsızdı.</p>
+<h3>Görmeden Sevmek</h3>
+<p class="poem">Ne çıkar yanımda olmasan,<br>Kalbim senden ibaret değil mi?<br>Uzaktan sevmek zor demişsin,<br>Etme sevdam,<br>Görmeden sevmek ibadet değil mi?</p><em class="n">5</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Düşüncelerime Dolandın</h3>
+<p class="poem">Olur da bir gece uyku tanımazsa gözlerin,<br>Aklın bulanır da derin bir iç çekersen,<br>İşte o vakit bilmeni isterim;<br>Uzun uzun seni düşlerim.<br><br>Olur da bir gece merak edersen,<br>Neyden sebeptir bu uykusuzluklarım, deyiversen,<br>İşte o vakit bana gel isterim.<br>Uzun uzun anlatırım, dinlemek istersen,<br>Söz, bu sefer inkâr etmem.<br>Düşüncelerime dolandın, sevdam oluverdin, derim.</p><em class="n">6</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Eylül</h3>
+<p class="poem">Ağustos geldi geçti,<br>Yoksa Eylül de mi sensiz gelip geçecek?<br>Rüzgârın da mı sonbaharda esmeyecek?<br>Yine sensizliği anlatırken mürekkepler mi tükenecek?<br>Ey yar, vefasızlık etme,<br>Sevdamı gölge gibi ardında bırakıp gitme.<br>Gelmek isteyip de gururuna yenik düşme,<br>Ey yar, Eylül’ü de yokluğuna mahkûm etme.</p><em class="n">7</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><h3>Bir Şey Eksik</h3>
+<p class="poem">Bugün güzel bir şey oldu.<br>Eskiden olsa<br>ilk sana anlatırdım.<br>Telefonumu elime aldım,<br>sonra fark ettim:<br>artık sevincimin gideceği<br>bir adresin yok.<br>İnsan bazen birini<br>üzüldüğünde değil,<br>tam mutlu olduğu anda<br>daha çok özlüyor.<br>Çünkü bazı insanlar gidince<br>hayatımızda boşluk bırakmıyor;<br>başımıza güzel bir şey geldiğinde<br>dönüp bakacağımız<br>bir tarafı eksiltiyor.</p><em class="n">8</em></div><div class="face back"></div></div>
+
+      <div class="leaf"><div class="face front pg"><div class="mid"><h3>Devamı kitapta…</h3><p>Kitabın tamamında daha fazla şiir, düşünce yazısı ve hiç gönderilmeyen mektuplar var.</p><p><a href="#haber" data-close style="color:#a3214f;font-weight:600">Çıkınca haber ver</a></p></div></div><div class="face back"></div></div>
+    </div>
+  </div>
+  <div class="ctl"><button id="prev" aria-label="Önceki sayfa">‹ Geri</button><span id="count">Kapak</span><button id="next" aria-label="Sonraki sayfa">İleri ›</button></div>
+  <div class="hint">Sayfayı parmağınla sola doğru sürükle</div>
+</div>
+
+<script>
+(function(){
+  var reader=document.getElementById('reader'),book=document.getElementById('book'),stage=document.getElementById('stage');
+  var leaves=Array.prototype.slice.call(book.querySelectorAll('.leaf')),N=leaves.length,ang=[],cur=0;
+  var prev=document.getElementById('prev'),next=document.getElementById('next'),count=document.getElementById('count');
+  leaves.forEach(function(l,i){l.style.zIndex=N-i;ang[i]=0;});
+  function setA(i,a){ang[i]=a;var l=leaves[i];l.style.transform='rotateY('+a+'deg)';l.style.visibility=a<=-179.5?'hidden':'visible';}
+  function tween(i,to,cb){var from=ang[i],t0=performance.now(),d=Math.max(150,Math.abs(to-from)*2.6);
+    (function s(t){var p=Math.min(1,(t-t0)/d);p=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;setA(i,from+(to-from)*p);if(p<1)requestAnimationFrame(s);else if(cb)cb();})(t0);}
+  function upd(){book.classList.toggle('closed',cur===0);count.textContent=cur===0?'Kapak':'Sayfa '+cur+' / '+(N-1);prev.disabled=cur===0;next.disabled=cur>=N-1;}
+  function go(d){if(d>0&&cur<N-1){tween(cur,-180);cur++;}else if(d<0&&cur>0){cur--;tween(cur,0);}upd();}
+  var sx=0,dir=0,leaf=-1,a=0,W=300,down=false;
+  stage.addEventListener('pointerdown',function(e){if(e.target.closest('a'))return;down=true;sx=e.clientX;dir=0;leaf=-1;W=stage.offsetWidth*.9;try{stage.setPointerCapture(e.pointerId);}catch(x){}});
+  stage.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;
+    if(!dir&&Math.abs(dx)>6){dir=dx<0?1:-1;leaf=dir>0?cur:cur-1;if(leaf<0||leaf>=N-1){dir=0;down=false;return;}sx=e.clientX;dx=0;}
+    if(!dir)return;
+    var p=Math.max(0,Math.min(1,dir>0?-dx/W:dx/W));
+    a=dir>0?-180*p:-180+180*p;setA(leaf,a);});
+  function end(){if(!down)return;down=false;if(!dir)return;
+    var p=dir>0?-a/180:(a+180)/180;
+    if(dir>0){if(p>.3){tween(leaf,-180);cur++;}else tween(leaf,0);}
+    else{if(p>.3){tween(leaf,0);cur--;}else tween(leaf,-180);}
+    dir=0;upd();}
+  stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+  prev.onclick=function(){go(-1)};next.onclick=function(){go(1)};
+  function open(){reader.hidden=false;document.body.style.overflow='hidden';document.getElementById('close').focus();}
+  function close(){reader.hidden=true;document.body.style.overflow='';}
+  Array.prototype.forEach.call(document.querySelectorAll('[data-read]'),function(b){b.onclick=open;});
+  document.getElementById('close').onclick=close;
+  reader.addEventListener('click',function(e){if(e.target.closest('[data-close]'))close();});
+  document.addEventListener('keydown',function(e){if(reader.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});
+  upd();
+})();
+</script>
+</body>
+</html>
